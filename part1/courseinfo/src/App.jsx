@@ -1,31 +1,31 @@
 // h1 "half stack application development"
-// p part1 exercises
-// p part2 exercises
-// p part3 exercises
-// p number of exercises 
+// p part1 exercises 10
+// p part2 exercises 7
+// p part3 exercises 14
+// p number of exercises 31
 
 const App = () => {
   const course = 'Half Stack application development'
-  const part1 = {
-    name: 'Fundamentals of React',
-    exercises: 10
-  }
-  const part2 = {
-    name: 'Using props to pass data',
-    exercises: 7
-  }
-  const part3 = {
-    name: 'State of a component',
-    exercises: 14
-  }
+  const parts = [
+    {
+      name: 'Fundamentals of React',
+      exercises: 10
+    },
+    {
+      name: 'Using props to pass data',
+      exercises: 7
+    },
+    {
+      name: 'State of a component',
+      exercises: 14
+    }
+  ]
 
   return (
     <div>
-      <h1>{course}</h1>
-      <p>{part1.name} {part1.exercises}</p>
-      <p>{part2.name} {part2.exercises}</p>
-      <p>{part3.name} {part3.exercises}</p>
-      <p>Number of exercises: {part1.exercises + part2.exercises + part3.exercises}</p>
+      <Header course={course} />
+      <Content parts={parts} />
+      <Total parts={parts} />
     </div>
   )
 }
@@ -36,33 +36,32 @@ const Header = (props) => {
 
 }
 
-const Content = (props) => {
+const Content = ({ parts }) => {
   return (
     <div>
-      <Part array={props.array} index={0} />
-      <Part array={props.array} index={1} />
-      <Part array={props.array} index={2} />
-
+      <Part array={parts[0]} />
+      <Part array={parts[1]} />
+      <Part array={parts[2]} />
     </div>
   )
 }
 
-const Part = (props) => {
+const Part = ({ array }) => {
   return (
     <p>
-      {props.array[props.index].part} {props.array[props.index].exercises}
+      {array.name} {array.exercises}
     </p>
   )
 }
 
 
-const Total = (props) => {
+const Total = ({ parts }) => {
   let total = 0
 
-  for (let index = 0; index < props.array.length; index++) {
-    total += props.array[index].exercises
+  for (let i = 0; i < parts.length; i++) {
+    total += parts[i].exercises
   }
-  return <p>Number of exercises: {total}</p>
+  return <p>Number of exercises {total}</p>
 }
 
 export default App
